@@ -1,0 +1,21 @@
+name: Automated API Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Apifox CLI
+      run: npm install -g apifox-cli
+
+    - name: Running Test Scenario
+      run: apifox run https://api.apifox.com/api/v1/projects/3461528/api-test/ci-config/389786/detail?token=x1FVpXcqK73V29V6SHZeI8 -r html,cli
